@@ -41,12 +41,12 @@ class Usuario extends CI_Controller {
                         redirect('dashboard');
                     }else {
                         $this->session->set_flashdata('erro', 'usuário inativo!');
-                        redirect('usuario/login');
+                        redirect('/login');
                     }
                     
                 } else {
                     $this->session->set_flashdata('erro', 'Email ou senha incorretos!');
-                    redirect('usuario/login');
+                    redirect('/login');
                 }
             } else {
                 $this->load->view('usuario/login');
@@ -57,7 +57,7 @@ class Usuario extends CI_Controller {
     public function logout() {
         $this->session->unset_userdata('logged_in');
         $this->session->set_flashdata('mensagem', 'Você saiu com sucesso!');
-        redirect('usuario/login');
+        redirect('/login');
     }
 
     public function registrar() {
@@ -111,7 +111,7 @@ class Usuario extends CI_Controller {
                     }
 
                     $this->session->set_flashdata('mensagem', 'Usuário criado com sucesso!');
-                    redirect('usuario/login');
+                    redirect('/login');
                 }
             }
         }
@@ -119,7 +119,7 @@ class Usuario extends CI_Controller {
 
     public function editar($id) {
         if (!$this->session->userdata('logged_in')) {
-            redirect('usuario/login');  
+            redirect('/login');  
         }
 
         $data['usuario'] = $this->Usuario_model->get_usuario_com_enderecos($id);
@@ -133,7 +133,7 @@ class Usuario extends CI_Controller {
 
     public function ver($id) {
         if (!$this->session->userdata('logged_in')) {
-            redirect('usuario/login');  
+            redirect('/login');  
         }
 
         $data['usuario'] = $this->Usuario_model->get_usuario_com_enderecos($id);
@@ -193,7 +193,7 @@ class Usuario extends CI_Controller {
 
     public function desativar($id) {
         if (!$this->session->userdata('logged_in')) {
-            redirect('usuario/login');  
+            redirect('/login');  
         }
     
         if ($this->Usuario_model->desativar_usuario($id)) {
@@ -207,7 +207,7 @@ class Usuario extends CI_Controller {
 
     public function ativar($id) {
         if (!$this->session->userdata('logged_in')) {
-            redirect('usuario/login');  
+            redirect('/login');  
         }
     
         if ($this->Usuario_model->ativar_usuario($id)) {

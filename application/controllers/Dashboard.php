@@ -13,7 +13,7 @@ class Dashboard extends CI_Controller {
     public function index()
     {
         if (!$this->session->userdata('logged_in')) {
-            redirect('usuario/login');  
+            redirect('/login');  
         }
 
         $data['usuarios'] = $this->Usuario_model->get_usuarios();

@@ -14,7 +14,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Sistema de Usuários</a>
+        <a class="navbar-brand" href="<?= base_url('dashboard') ?>">Sistema de Usuários</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -62,12 +62,12 @@
 
                         <div class="mb-3">
                             <label for="cpf" class="form-label">CPF:</label>
-                            <input type="text" class="form-control" name="cpf" value="<?= $usuario['cpf']; ?>" required>
+                            <input type="text" class="form-control" name="cpf" value="<?= $usuario['cpf']; ?>" readonly="true" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="telefone" class="form-label">Telefone:</label>
-                            <input type="text" class="form-control" name="telefone" value="<?= $usuario['telefone']; ?>">
+                            <input type="text" class="form-control" name="telefone" id="telefone" value="<?= $usuario['telefone']; ?>">
                         </div>
 
                         <div class="mb-3">
@@ -206,7 +206,9 @@
                     data: {
                         id_endereco: $(this).data('id'), 
                         id_usuario: $('#userId').val()
-                    }
+                    },
+                }).then(() => {
+                    location.reload();  
                 });
             })
 

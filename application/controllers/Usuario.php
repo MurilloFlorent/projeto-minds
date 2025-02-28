@@ -153,7 +153,6 @@ class Usuario extends CI_Controller {
             $dados_usuario = array(
                 'nome' => $this->input->post('nome'),
                 'email' => $this->input->post('email'),
-                'cpf' => $this->input->post('cpf'),
                 'sobrenome' => $this->input->post('sobrenome'),
                 'senha' => $this->input->post('senha'),
                 'telefone' => $this->input->post('telefone'),

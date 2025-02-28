@@ -24,3 +24,12 @@ CREATE TABLE IF NOT EXISTS `enderecos` (
     FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
+CREATE TABLE logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tabela VARCHAR(50),
+    acao VARCHAR(50),
+    dados TEXT,
+    usuario_id INT NULL,
+    data TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+

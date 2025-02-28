@@ -7,6 +7,8 @@ class Usuario_model extends CI_Model {
     {
         parent::__construct();
         $this->load->database();
+        $this->load->library('session');
+
     }
 
     public function salvar_usuario($dados_usuario)
@@ -16,6 +18,9 @@ class Usuario_model extends CI_Model {
         $this->db->insert('usuarios', $dados_usuario);
 
         $usuario_id = $this->db->insert_id();
+
+        $this->load->model('Log_model');
+        $this->Log_model->registrar_log('usuarios', 'inserir', $dados_usuario, $usuario_id);
 
         return $this->get_user($usuario_id);
     }
@@ -131,17 +136,35 @@ public function get_usuarios_com_enderecos()
     {
         // Atualiza os dados do usuário
         $this->db->where('id', $id);
+
+        $this->load->model('Log_model');
+        $this->Log_model->registrar_log('usuarios', 'atualizar', $dados,$this->session->userdata('user_id'));
+
         return $this->db->update('usuarios', $dados);
+
+        
     }
 
     public function desativar_usuario($id) {
         $this->db->where('id', $id);
+
+        $this->load->model('Log_model');
+        $this->Log_model->registrar_log('usuarios', 'desativando_user', $id, $this->session->userdata('user_id'));
+
         return $this->db->update('usuarios', ['status' => 0]);
+
+        
     }
 
     public function ativar_usuario($id) {
         $this->db->where('id', $id);
+
+        $this->load->model('Log_model');
+        $this->Log_model->registrar_log('usuarios', 'ativando_user', $id , $this->session->userdata('user_id'));
+
         return $this->db->update('usuarios', ['status' => 1]);
+
+        
     }
     
 
@@ -160,7 +183,13 @@ public function get_usuarios_com_enderecos()
     public function atualizar_senha($id, $nova_senha)
     {
         $this->db->where('id', $id);
+
+        $this->load->model('Log_model');
+        $this->Log_model->registrar_log('usuarios', 'atualizando_senha', $id, $this->session->userdata('user_id'));
+
         return $this->db->update('usuarios', ['senha' => $nova_senha]);
+
+        
     }
     
 }
